@@ -1,5 +1,3 @@
-# main.py
-
 import requests
 import random
 import time
@@ -13,8 +11,8 @@ user_agents = [
 ]
 
 # TTV platform endpoints
-VIEW_URL = "https://www.ttv.com/watch/"
-SUBSCRIBE_URL = "https://www.ttv.com/subscribe/"
+VIEW_URL = "https://youtube.com/watch?v=sB-tC4xTu1M"
+SUBSCRIBE_URL = "https://www.youtube.com/channel/UCK6dxQEInA6z0nAkfAsVtAA"
 
 # Function to get a random proxy
 def get_random_proxy():
@@ -70,9 +68,9 @@ def run_bot(video_id, channel_id, view_target=50, sub_target=50):
         increase_subscriber(channel_id)
         time.sleep(random.uniform(5, 15))  # Random delay between requests
 
-# Sample video and channel IDs
-video_id = "sample_video_id"
-channel_id = "sample_channel_id"
+# Actual video and channel IDs
+video_id = "sB-tC4xTu1M"
+channel_id = "UCK6dxQEInA6z0nAkfAsVtAA"
 
 # Run the bot for testing
 run_bot(video_id, channel_id)
