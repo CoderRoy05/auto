@@ -1,0 +1,64 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Click Counter</title>
+    <style>
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Click Counter</h2>
+    <p>Button clicked <span id="count">0</span> times.</p>
+    <button id="clickButton">Click Me</button>
+
+    <script>
+        // Get the counter element and button
+        const countDisplay = document.getElementById("count");
+        const clickButton = document.getElementById("clickButton");
+
+        // Load the initial count from localStorage or set to 0 if not set
+        let clickCount = parseInt(localStorage.getItem("clickCount")) || 0;
+        countDisplay.textContent = clickCount;
+
+        // Add event listener to the button
+        clickButton.addEventListener("click", () => {
+            clickCount++; // Increment the count
+            countDisplay.textContent = clickCount; // Update the display
+            localStorage.setItem("clickCount", clickCount); // Store in localStorage
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show IP Address</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Your IP Address</h1>
+    <p id="ip-address">Loading...</p>
+
+    <script>
+        // Fetch the user's IP address using the ipify API
+        $.get("https://api.ipify.org?format=json", function(data) {
+            // Display the IP address
+            document.getElementById("ip-address").innerText = data.ip;
+        });
+    </script>
+</body>
+</html>
