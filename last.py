@@ -21,4 +21,4 @@ def simulate_visitors(number_of_visitors):
         browser.close()
 
 # Set the number of visitors
-simulate_visitors(number_of_visitors=20)
+simulate_visitors(number_of_visitors=50)
