@@ -18,6 +18,8 @@ playwright codegen
 pip install beautifulsoup4
 pip install requests
 pip install requests faker beautifulsoup4
+pip install requests fake-useragent colorama
+
 
 
 
@@ -26,3 +28,21 @@ pip install requests faker beautifulsoup4
         <!-- WORKED ON GOOGLE ANALYTICS  -->
         
     -  Last.py
+
+
+
+
+    <!-- NOT WORKED YET  -->
+
+    -main.py
+    -main2.py
+
+
+
+
+print devices types---
+
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    print(list(p.devices.keys()))
