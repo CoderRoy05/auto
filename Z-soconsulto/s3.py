@@ -89,7 +89,7 @@ def simulate_random_navigation_with_devices(number_of_visitors):
         browser.close()
 
 # Simulate 20 visitors with random navigation and device emulation
-simulate_random_navigation_with_devices(number_of_visitors=20)
+simulate_random_navigation_with_devices(number_of_visitors=100)
 
 
 

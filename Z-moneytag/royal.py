@@ -49,7 +49,7 @@ def simulate_visitors(number_of_visitors):
                 page = context.new_page()
 
                 # Navigate to the website
-                page.goto('https://soconsulto.pages.dev/')
+                page.goto('https://royal-8vd.pages.dev')
 
                 # Simulate random interactions (e.g., scrolling)
                 if random.choice([True, False]):  # Randomly decide to scroll
@@ -73,8 +73,8 @@ def simulate_visitors(number_of_visitors):
         browser.close()
 
 # Simulate 20 visitors
-simulate_visitors(number_of_visitors=20)
+simulate_visitors(number_of_visitors=500)
 
 
 
-# ONLY https://soconsulto.pages.dev/ !!NAV!! 
+# TESTING ON ROYAL-8VD.PAGES.DEV SITE 

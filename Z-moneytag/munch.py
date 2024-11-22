@@ -49,7 +49,7 @@ def simulate_visitors(number_of_visitors):
                 page = context.new_page()
 
                 # Navigate to the website
-                page.goto('https://royal-8vd.pages.dev')
+                page.goto('https://munchmap.pages.dev/')
 
                 # Simulate random interactions (e.g., scrolling)
                 if random.choice([True, False]):  # Randomly decide to scroll

@@ -2,9 +2,9 @@ from playwright.sync_api import sync_playwright
 import random
 import time
 
-def simulate_random_navigation_with_devices(number_of_visitors):
+def simulate_random_navigation_with_language_and_devices(number_of_visitors):
     """
-    Simulate visitors navigating randomly between website pages with device emulation.
+    Simulate visitors navigating randomly between website pages with language and device emulation.
 
     Args:
     - number_of_visitors: Number of virtual visitors to simulate.
@@ -20,6 +20,18 @@ def simulate_random_navigation_with_devices(number_of_visitors):
             'https://soconsulto.pages.dev/blog/home',
             'https://soconsulto.pages.dev/c-u/contact_us',
             'https://soconsulto.pages.dev/Policy/Privacy_policy'
+        ]
+
+        # Define demographic language settings
+        languages = [
+            "en-US",  # United States English
+            "yo",     # Yoruba
+            "fr-FR",  # French (France)
+            "zh-CN",  # Chinese (Simplified)
+            "hi-IN",  # Hindi (India)
+            "es-ES",  # Spanish
+            "en-GB",  # English (United Kingdom)
+            "de-DE"   # German (Germany)
         ]
 
         # Define a list of valid devices to emulate
@@ -42,16 +54,19 @@ def simulate_random_navigation_with_devices(number_of_visitors):
 
         for i in range(number_of_visitors):
             try:
+                # Randomly select a language from the list
+                selected_language = random.choice(languages)
+
                 # Randomly select a device or default to desktop
                 device = random.choice(devices)
 
                 if device:
-                    # Create a context emulating the chosen device
-                    context = browser.new_context(**device)
+                    # Create a context emulating the chosen device and language
+                    context = browser.new_context(**device, extra_http_headers={"Accept-Language": selected_language})
                     device_name = device.get("name", "Unknown Device")  # Safely access device name
                 else:
-                    # Create a default browser context
-                    context = browser.new_context()
+                    # Create a default browser context with language settings
+                    context = browser.new_context(extra_http_headers={"Accept-Language": selected_language})
                     device_name = "Desktop"
 
                 # Open a new page in the context
@@ -80,7 +95,7 @@ def simulate_random_navigation_with_devices(number_of_visitors):
                 page.close()
                 context.close()
 
-                print(f"Visitor {i + 1} simulated with device: {device_name} and navigated to {num_pages_to_visit} page(s).")
+                print(f"Visitor {i + 1} simulated with language: {selected_language}, device: {device_name}, and navigated to {num_pages_to_visit} page(s).")
 
             except Exception as e:
                 print(f"Error during simulation for visitor {i + 1}: {e}")
@@ -88,9 +103,10 @@ def simulate_random_navigation_with_devices(number_of_visitors):
         # Close the browser
         browser.close()
 
-# Simulate 20 visitors with random navigation and device emulation
-simulate_random_navigation_with_devices(number_of_visitors=20)
+# Simulate 20 visitors with random navigation, language, and device emulation
+simulate_random_navigation_with_language_and_devices(number_of_visitors=100)
 
 
 
-# NAVigation to random pages !!NAV!! 
+
+# Nav to random page + language for different users 
