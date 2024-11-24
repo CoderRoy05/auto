@@ -77,4 +77,4 @@ simulate_visitors(number_of_visitors=500)
 
 
 
-# TESTING ON ROYAL-8VD.PAGES.DEV SITE 
+# TESTING ON Munchmap.PAGES.DEV SITE 

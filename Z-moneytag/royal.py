@@ -11,7 +11,7 @@ def simulate_visitors(number_of_visitors):
     """
     with sync_playwright() as p:
         # Launch the browser (headless=True for headless mode)
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=True)
 
         # Define a list of valid devices to emulate
         devices = [

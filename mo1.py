@@ -4,7 +4,7 @@ import time
 
 def simulate_visitors(number_of_visitors):
     """
-    Simulate visitors to a website with different device types and referrer traffic.
+    Simulate visitors to a website with different device types and allow body clicks.
 
     Args:
     - number_of_visitors: Number of virtual visitors to simulate.
@@ -19,7 +19,7 @@ def simulate_visitors(number_of_visitors):
             p.devices["Galaxy S9+"],
             p.devices["iPad Pro 11"],
             p.devices["iPhone XR"],
-            p.devices["Kindle Fire HDX"],  # Adding variety
+            p.devices["Kindle Fire HDX"],
             p.devices["Moto G4 landscape"],
             p.devices["Desktop Chrome HiDPI"],
             p.devices["Desktop Edge HiDPI"],
@@ -29,15 +29,6 @@ def simulate_visitors(number_of_visitors):
             p.devices["Desktop Edge"],
             p.devices["Desktop Firefox"],
             None,  # Default desktop device
-        ]
-
-        # List of referrers for traffic simulation
-        referrers = [
-            "https://www.google.com",
-            "https://www.bing.com",
-            "https://www.facebook.com",
-            "https://www.twitter.com",
-            "https://www.instagram.com",
         ]
 
         for i in range(number_of_visitors):
@@ -57,28 +48,32 @@ def simulate_visitors(number_of_visitors):
                 # Open a new page within the context
                 page = context.new_page()
 
-                # Set a random referrer for the visit
-                referrer = random.choice(referrers)
-                page.set_extra_http_headers({"Referer": referrer})
+                # Navigate to the website
+                page.goto('https://munchmap.pages.dev/')
 
-                # Navigate to the target website (Soconsulto page)
-                page.goto('https://soconsulto.pages.dev/')
-
-                # Simulate random actions (e.g., scrolling)
+                # Simulate random interactions (e.g., scrolling)
                 if random.choice([True, False]):  # Randomly decide to scroll
                     for _ in range(random.randint(1, 3)):
                         page.evaluate("window.scrollBy(0, window.innerHeight);")
                         time.sleep(random.uniform(1, 3))  # Pause between scrolls
 
-                # Simulate time spent on the page (dwell time)
-                time.sleep(random.uniform(2, 7))
+                # Simulate random clicks on the page body
+                body = page.locator("body")
+                if body.is_visible():
+                    # Perform a random click within the body element
+                    x = random.randint(0, page.viewport_size['width'] - 1)
+                    y = random.randint(0, page.viewport_size['height'] - 1)
+                    page.mouse.click(x, y)
+                    print(f"Clicked on coordinates ({x}, {y}) in the body.")
+
+                # Wait between 2 to 7 seconds to mimic real visitor behavior
+                time.sleep(random.uniform(4, 7))
 
                 # Close the page and context
                 page.close()
                 context.close()
 
-                # Log a simplified output message
-                print(f"Visitor {i + 1} referrer: {referrer} successfully.")
+                print(f"Visitor {i + 1} simulated with device: {device_name}")
 
             except Exception as e:
                 print(f"Error during simulation for visitor {i + 1}: {e}")
@@ -86,9 +81,9 @@ def simulate_visitors(number_of_visitors):
         # Close the browser
         browser.close()
 
-# Simulate 100 visitors
-simulate_visitors(number_of_visitors=100)
+# Simulate 500 visitors
+simulate_visitors(number_of_visitors=500)
 
 
 
-# ONLY https://soconsulto.pages.dev/ !!NAV!! 
+# nav with clickable for ads 

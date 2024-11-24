@@ -9,5 +9,5 @@ only soconsulto home nav  ---- 500 times ----- 1hr
 different nav pages    ------- 100 times ------ 40 min
 
 
-PROJECT
-now we add language
+<---------------------  PROJECT TO DO ----------------------->
+Add fingerprint
