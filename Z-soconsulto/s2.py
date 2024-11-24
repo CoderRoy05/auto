@@ -4,7 +4,7 @@ import time
 
 def simulate_random_navigation_with_devices(number_of_visitors):
     """
-    Simulate visitors navigating randomly between website pages with device emulation.
+    Simulate visitors navigating randomly between website pages with device emulation and referrers.
 
     Args:
     - number_of_visitors: Number of virtual visitors to simulate.
@@ -40,6 +40,15 @@ def simulate_random_navigation_with_devices(number_of_visitors):
             None,  # Default desktop device
         ]
 
+        # Define a list of referrers for traffic simulation
+        referrers = [
+            "https://www.google.com",
+            "https://www.bing.com",
+            "https://www.facebook.com",
+            "https://www.twitter.com",
+            "https://www.instagram.com",
+        ]
+
         for i in range(number_of_visitors):
             try:
                 # Randomly select a device or default to desktop
@@ -56,6 +65,10 @@ def simulate_random_navigation_with_devices(number_of_visitors):
 
                 # Open a new page in the context
                 page = context.new_page()
+
+                # Set a random referrer for the visit
+                referrer = random.choice(referrers)
+                page.set_extra_http_headers({"Referer": referrer})
 
                 # Randomly decide the number of pages this visitor will navigate
                 num_pages_to_visit = random.randint(1, len(pages))
@@ -80,7 +93,8 @@ def simulate_random_navigation_with_devices(number_of_visitors):
                 page.close()
                 context.close()
 
-                print(f"Visitor {i + 1} simulated with device: {device_name} and navigated to {num_pages_to_visit} page(s).")
+                # Simplified log output
+                print(f"Visitor {i + 1} referrer: {referrer} navigated to {num_pages_to_visit} page(s) successfully.")
 
             except Exception as e:
                 print(f"Error during simulation for visitor {i + 1}: {e}")
@@ -88,7 +102,7 @@ def simulate_random_navigation_with_devices(number_of_visitors):
         # Close the browser
         browser.close()
 
-# Simulate 20 visitors with random navigation and device emulation
+# Simulate 100 visitors with random navigation and device emulation
 simulate_random_navigation_with_devices(number_of_visitors=100)
 
 

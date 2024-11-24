@@ -1,10 +1,10 @@
 # name: Run Visitor Simulation Tests
 
 # on:
-#   push:         # Trigger when code is pushed
+#   push:
 #     branches:
-#       - main    # Only run on the main branch
-#   pull_request: # Trigger on pull requests targeting main
+#       - main
+#   pull_request:
 #     branches:
 #       - main
 
@@ -14,22 +14,22 @@
 
 #     steps:
 #     - name: Checkout Code
-#       uses: actions/checkout@v3 # Pull the repository code
+#       uses: actions/checkout@v3
 
 #     - name: Set up Python
 #       uses: actions/setup-python@v4
 #       with:
-#         python-version: '3.10' # Specify Python version
+#         python-version: '3.10'
 
 #     - name: Install Playwright
 #       run: |
 #         python -m pip install --upgrade pip
 #         pip install -r requirements.txt
-#         playwright install-deps  # Install system dependencies
-#         playwright install       # Install browser binaries
+#         playwright install-deps
+#         playwright install
 
-#     - name: Run Simulation Script
-#       run: python test.py
+#     - name: Run Simulation Script (with xvfb)
+#       run: xvfb-run --auto-servernum -- python test.py
 
 
 name: Run Visitor Simulation Tests
@@ -45,6 +45,9 @@ on:
 jobs:
   simulate-visitors:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        batch: [1, 2, 3, 4, 5] # 5 batches
 
     steps:
     - name: Checkout Code
@@ -62,5 +65,5 @@ jobs:
         playwright install-deps
         playwright install
 
-    - name: Run Simulation Script (with xvfb)
-      run: xvfb-run --auto-servernum -- python test.py
+    - name: Run Simulation Script (Batch ${{ matrix.batch }})
+      run: xvfb-run --auto-servernum -- python ro1.py $((5000 / 5)) # Adjust batch size
