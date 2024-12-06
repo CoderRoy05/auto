@@ -11,7 +11,7 @@ def simulate_visitors(number_of_visitors):
     """
     with sync_playwright() as p:
         # Launch the browser (headless=True for headless mode)
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=True)
 
         # Define a list of valid devices to emulate
         devices = [
@@ -49,7 +49,7 @@ def simulate_visitors(number_of_visitors):
                 page = context.new_page()
 
                 # Navigate to the website
-                page.goto('https://munchmap.pages.dev/')
+                page.goto('https://royal-8vd.pages.dev/')
 
                 # Simulate random interactions (e.g., scrolling)
                 if random.choice([True, False]):  # Randomly decide to scroll

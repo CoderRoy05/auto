@@ -82,7 +82,7 @@ def simulate_visitors(number_of_visitors):
         browser.close()
 
 # Simulate 500 visitors
-simulate_visitors(number_of_visitors=500)
+simulate_visitors(number_of_visitors=1000)
 
 
 # nav with clickable for ads 

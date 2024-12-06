@@ -2,6 +2,31 @@ from playwright.sync_api import sync_playwright
 import random
 import time
 
+def scroll_to_bottom(page):
+    """
+    Scroll to the bottom of the page dynamically.
+    Continues scrolling until no more height is available.
+    """
+    try:
+        while True:
+            # Get the current scroll position and total scrollable height
+            previous_height = page.evaluate("document.documentElement.scrollTop + window.innerHeight")
+            
+            # Scroll down by the window height
+            page.evaluate("window.scrollBy(0, window.innerHeight);")
+            
+            # Wait to allow content to load (if any dynamic loading occurs)
+            time.sleep(random.uniform(1, 2))
+            
+            # Get the new scroll position
+            current_height = page.evaluate("document.documentElement.scrollTop + window.innerHeight")
+            
+            # Break if we have reached the bottom of the page
+            if current_height == previous_height:
+                break
+    except Exception as e:
+        print(f"Error during scrolling: {e}")
+
 def simulate_random_navigation_with_devices(number_of_visitors):
     """
     Simulate visitors navigating randomly between website pages with device emulation and referrers.
@@ -80,14 +105,11 @@ def simulate_random_navigation_with_devices(number_of_visitors):
                     # Navigate to the page
                     page.goto(page_url)
 
-                    # Simulate user interaction (e.g., scrolling)
-                    if random.choice([True, False]):  # Randomly decide to scroll
-                        for _ in range(random.randint(1, 3)):
-                            page.evaluate("window.scrollBy(0, window.innerHeight);")
-                            time.sleep(random.uniform(1, 3))  # Pause between scrolls
+                    # Scroll dynamically to the bottom
+                    scroll_to_bottom(page)
 
                     # Wait between 2 to 7 seconds to mimic real user behavior
-                    time.sleep(random.uniform(2, 7))
+                    time.sleep(random.uniform(5, 10))
 
                 # Close the page and context after completing navigation
                 page.close()
@@ -102,9 +124,8 @@ def simulate_random_navigation_with_devices(number_of_visitors):
         # Close the browser
         browser.close()
 
-# Simulate 100 visitors with random navigation and device emulation
-simulate_random_navigation_with_devices(number_of_visitors=100)
+# Simulate 5000 visitors with random navigation and device emulation
+simulate_random_navigation_with_devices(number_of_visitors=5000)
 
 
-
-# NAVigation to random pages !!NAV!! 
+# # NAVigation to random pages !!NAV!! 
