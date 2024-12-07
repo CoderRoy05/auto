@@ -69,9 +69,9 @@ def simulate_random_navigation_with_devices(number_of_visitors):
         referrers = [
             "https://www.google.com",
             "https://www.bing.com",
-            "https://www.facebook.com",
-            "https://www.twitter.com",
             "https://www.instagram.com",
+            "https://www.youtube.com", 
+            "https://www.linkedin.com", 
         ]
 
         for i in range(number_of_visitors):
@@ -109,7 +109,7 @@ def simulate_random_navigation_with_devices(number_of_visitors):
                     scroll_to_bottom(page)
 
                     # Wait between 2 to 7 seconds to mimic real user behavior
-                    time.sleep(random.uniform(5, 10))
+                    time.sleep(random.uniform(7, 15))
 
                 # Close the page and context after completing navigation
                 page.close()
@@ -125,7 +125,7 @@ def simulate_random_navigation_with_devices(number_of_visitors):
         browser.close()
 
 # Simulate 5000 visitors with random navigation and device emulation
-simulate_random_navigation_with_devices(number_of_visitors=5000)
+simulate_random_navigation_with_devices(number_of_visitors=100)
 
 
 # # NAVigation to random pages !!NAV!! 

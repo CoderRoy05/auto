@@ -13,11 +13,11 @@ PAGES = [
 ]
 
 REFERRERS = [
-    "https://www.google.com",
-    "https://www.bing.com",
-    "https://www.facebook.com",
-    "https://www.twitter.com",
-    "https://www.instagram.com",
+            "https://www.google.com",
+            "https://www.bing.com",
+            "https://www.instagram.com",
+            "https://www.youtube.com", 
+            "https://www.linkedin.com", 
 ]
 
 DEVICES = [
@@ -118,4 +118,4 @@ def simulate_visitors(number_of_visitors, threads=10):
         thread.join()
 
 if __name__ == "__main__":
-    simulate_visitors(number_of_visitors=50, threads=10)
+    simulate_visitors(number_of_visitors=100, threads=10)
