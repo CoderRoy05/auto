@@ -49,7 +49,7 @@ name: Visitor Simulation Automation
 on:
   workflow_dispatch: # Allows manual start
   schedule:
-    - cron: "*/30 * * * *" # Triggers every 30 minutes
+    - cron: "*/1 * * * *" # Triggers every 30 minutes
 
 concurrency:
   group: simulate-visitors
