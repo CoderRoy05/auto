@@ -46,3 +46,13 @@ from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
     print(list(p.devices.keys()))
+
+
+
+PAGES = [
+    'https://sjr.pages.dev/',
+    'https://sjr.pages.dev/order',
+    'https://sjr.pages.dev/company',
+    'https://sjr.pages.dev/faq',
+    'https://sjr.pages.dev/contact'
+]

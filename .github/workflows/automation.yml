@@ -1,4 +1,4 @@
-# name: Run Visitor Simulation Tests
+# name: Visitor Simulation Automation
 
 # on:
 #   push:
@@ -13,7 +13,7 @@
 #     runs-on: ubuntu-latest
 #     strategy:
 #       matrix:
-#         batch: [1, 2, 3, 4, 5] # 5 batches
+#         batch: [1, 2, 3, 4, 5] # Process in 5 batches
 
 #     steps:
 #     - name: Checkout Code
@@ -24,33 +24,97 @@
 #       with:
 #         python-version: '3.10'
 
-#     - name: Install Playwright
+#     - name: Install Dependencies
 #       run: |
 #         python -m pip install --upgrade pip
 #         pip install -r requirements.txt
 #         playwright install-deps
 #         playwright install
 
-#     - name: Run Simulation Script (Batch ${{ matrix.batch }})
-#       run: xvfb-run --auto-servernum -- python ro1.py $((5000 / 5)) # Adjust batch size
+#     - name: Run Visitor Simulation for Batch ${{ matrix.batch }}
+#       run: xvfb-run --auto-servernum -- python server.py --batch ${{ matrix.batch }}
+
+
+
+
+
+
+
+
+
+
+
+# name: Visitor Simulation Automation
+
+# on:
+#   workflow_dispatch: # Allows manual start
+#   schedule:
+#     - cron: "*/30 * * * *" # Triggers every 30 minutes
+
+# concurrency:
+#   group: simulate-visitors
+#   cancel-in-progress: false # Ensures no overlapping workflows
+
+# jobs:
+#   simulate-visitors:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         batch: [1, 2, 3, 4, 5] # Process in 5 batches
+
+#     steps:
+#     - name: Checkout Code
+#       uses: actions/checkout@v3
+
+#     - name: Set up Python
+#       uses: actions/setup-python@v4
+#       with:
+#         python-version: '3.10'
+
+#     - name: Install Dependencies
+#       run: |
+#         python -m pip install --upgrade pip
+#         pip install -r requirements.txt
+#         playwright install-deps
+#         playwright install
+
+#     - name: Run Visitor Simulation for Batch ${{ matrix.batch }}
+#       run: xvfb-run --auto-servernum -- python server.py --batch ${{ matrix.batch }}
+
+#   delay-between-runs:
+#     runs-on: ubuntu-latest
+#     needs: simulate-visitors # Waits for all batches to complete
+#     steps:
+#     - name: Add Random Delay
+#       run: |
+#         DELAY=$((30 + RANDOM % 21)) # Random delay between 30 and 50 minutes
+#         echo "Sleeping for $DELAY minutes..."
+#         sleep $((DELAY * 60))
+
+
+
+
+
+
 
 
 name: Visitor Simulation Automation
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:  # Allows manual start
+  schedule:
+    - cron: "*/30 * * * *"  # Triggers every 30 minutes
+
+concurrency:
+  group: simulate-visitors
+  cancel-in-progress: false  # Ensures no overlapping workflows
 
 jobs:
-  simulate-visitors:
+  simulate-soconsulto-visitors:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        batch: [1, 2, 3, 4, 5] # Process in 5 batches
+        batch: [1, 2, 3, 4, 5]  # Process in 5 batches for Soconsulto pages
 
     steps:
     - name: Checkout Code
@@ -68,5 +132,30 @@ jobs:
         playwright install-deps
         playwright install
 
-    - name: Run Visitor Simulation for Batch ${{ matrix.batch }}
-      run: xvfb-run --auto-servernum -- python server.py --batch ${{ matrix.batch }}
+    - name: Run Visitor Simulation for Batch ${{ matrix.batch }} (Soconsulto)
+      run: xvfb-run --auto-servernum -- python server.py --batch ${{ matrix.batch }} --pages soconsulto
+
+  simulate-sjr-visitors:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        batch: [1, 2, 3, 4, 5]  # Process in 5 batches for SJR pages
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install-deps
+        playwright install
+
+    - name: Run Visitor Simulation for Batch ${{ matrix.batch }} (SJR)
+      run: xvfb-run --auto-servernum -- python server.py --batch ${{ matrix.batch }} --pages sjr
