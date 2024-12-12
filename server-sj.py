@@ -5,11 +5,11 @@ import threading
 
 # Pages and referrers
 PAGES = [
-    'https://soconsulto.pages.dev/',
-    'https://soconsulto.pages.dev/about/about',
-    'https://soconsulto.pages.dev/blog/home',
-    'https://soconsulto.pages.dev/c-u/contact_us',
-    'https://soconsulto.pages.dev/Policy/Privacy_policy'
+    'https://sjr.pages.dev/',
+    'https://sjr.pages.dev/order',
+    'https://sjr.pages.dev/company',
+    'https://sjr.pages.dev/faq',
+    'https://sjr.pages.dev/contact'
 ]
 
 REFERRERS = [
