@@ -128,4 +128,4 @@ def simulate_random_navigation_with_devices(number_of_visitors):
 simulate_random_navigation_with_devices(number_of_visitors=100)
 
 
-# # NAVigation to random pages !!NAV!! 
+# # NAVigation to random pages !!NAV!! FOR SJR!!
