@@ -118,4 +118,4 @@ def simulate_visitors(number_of_visitors, threads=10):
         thread.join()
 
 if __name__ == "__main__":
-    simulate_visitors(number_of_visitors=500, threads=10)
+    simulate_visitors(number_of_visitors=700, threads=10)
