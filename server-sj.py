@@ -40,7 +40,7 @@ def scroll_to_bottom(page):
             page.evaluate("window.scrollBy(0, window.innerHeight);")
             
             # Wait for the page to load more content if applicable
-            time.sleep(random.uniform(2, 4))
+            time.sleep(random.uniform(2, 3))
             
             # Get the new scroll height
             current_height = page.evaluate("document.documentElement.scrollTop + window.innerHeight")
@@ -84,7 +84,7 @@ def simulate_single_visitor(visitor_id):
                 scroll_to_bottom(page)
 
                 # Mimic a short pause between actions
-                time.sleep(random.uniform(9, 15))
+                time.sleep(random.uniform(7, 12))
 
             print(f"Visitor {visitor_id} navigated successfully to {num_pages_to_visit} pages.")
             page.close()
@@ -118,4 +118,4 @@ def simulate_visitors(number_of_visitors, threads=10):
         thread.join()
 
 if __name__ == "__main__":
-    simulate_visitors(number_of_visitors=700, threads=10)
+    simulate_visitors(number_of_visitors=800, threads=10)
