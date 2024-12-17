@@ -84,7 +84,7 @@ def simulate_single_visitor(visitor_id):
                 scroll_to_bottom(page)
 
                 # Mimic a short pause between actions
-                time.sleep(random.uniform(6, 12))
+                time.sleep(random.uniform(5, 9))
 
             print(f"Visitor {visitor_id} navigated successfully to {num_pages_to_visit} pages.")
             page.close()
@@ -118,4 +118,4 @@ def simulate_visitors(number_of_visitors, threads=10):
         thread.join()
 
 if __name__ == "__main__":
-    simulate_visitors(number_of_visitors=900, threads=10)
+    simulate_visitors(number_of_visitors=1100, threads=10)
